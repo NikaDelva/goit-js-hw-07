@@ -19,6 +19,7 @@ galleryEl.insertAdjacentHTML('beforeend', galleryPhotosArr)
 
 const galleryImageEl = document.querySelector('.gallery__image');
 console.log(galleryImageEl)
+let modalEl = null;
 
 galleryEl.addEventListener('click', onImageClick);
 
@@ -27,7 +28,7 @@ function onImageClick(event) {
     if (event.target.nodeName !== 'IMG') {
         return
     }
-    const modalEl = basicLightbox.create(`
+    modalEl = basicLightbox.create(`
         <img src='${event.target.dataset.source}' width='1400' height='900'>`, {});
     modalEl.show();
     document.addEventListener('keydown', onEscapeClose);
@@ -35,7 +36,7 @@ function onImageClick(event) {
 
 function onEscapeClose(event) {
     if (event.code === 'Escape') {
-        modalEl.close();
+    modalEl.close();
     }
 }
 
