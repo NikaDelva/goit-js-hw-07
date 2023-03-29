@@ -29,7 +29,7 @@ function onImageClick(event) {
         return
     }
     modalEl = basicLightbox.create(`
-        <img src='${event.target.dataset.source}' width='1400' height='900'>`, {});
+        <img src='${event.target.dataset.source}' width='1280' height='855'>`, {});
     modalEl.show();
     document.addEventListener('keydown', onEscapeClose);
 }
