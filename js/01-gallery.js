@@ -19,25 +19,25 @@ galleryEl.insertAdjacentHTML('beforeend', galleryPhotosArr)
 
 const galleryImageEl = document.querySelector('.gallery__image');
 console.log(galleryImageEl)
-let modalEl = null;
 
 galleryEl.addEventListener('click', onImageClick);
 
 function onImageClick(event) {
     event.preventDefault();
     if (event.target.nodeName !== 'IMG') {
-        return
+        return;
     }
-    modalEl = basicLightbox.create(`
-        <img src='${event.target.dataset.source}' width='1280' height='855'>`, {});
+    const modalEl = basicLightbox.create(`
+        <img src='${event.target.dataset.source}' width='1280' height='855'>`, {
+        onShow: () => { document.addEventListener('keydown', onEscapeClose) },
+        onClose: () => { document.removeEventListener('keydown', onEscapeClose) }
+    });
+    const onEscapeClose = event => {
+        if (event.code === 'Escape') {
+            modalEl.close();
+        }
+    }
     modalEl.show();
-    document.addEventListener('keydown', onEscapeClose);
-}
-
-function onEscapeClose(event) {
-    if (event.code === 'Escape') {
-    modalEl.close();
-    }
 }
 
 
